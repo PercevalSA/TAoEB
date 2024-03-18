@@ -1,7 +1,7 @@
 from pathlib import Path
 from random import choice
 
-DEFAULT_QUOTE_FOLDER = Path('/workspaces/TAoEB/sounds')
+DEFAULT_QUOTE_FOLDER = Path('/workspaces/TAoEB/assets/sounds')
 
 def download_quotes():
     """Download AoE2 quotes from the internet."""

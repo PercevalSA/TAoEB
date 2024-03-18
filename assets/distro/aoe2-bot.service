@@ -1,5 +1,5 @@
 [Unit]
-Description=Age Of Empire 2 Telegram Bot
+Description=Age Of Empires 2 Telegram Bot
 After=network.target
 
 [Service]

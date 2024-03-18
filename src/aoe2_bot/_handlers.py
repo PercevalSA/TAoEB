@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import CommandHandler, ApplicationBuilder, ContextTypes
 from ._quotes import get_random_quote
 
-aoe2_logo = "/workspaces/TAoEB/images/Age_of_Empires_2_Logo.png"
+aoe2_logo = "/workspaces/TAoEB/assets/images/Age_of_Empires_2_Logo.png"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="À la bataille! Use /aoe to get a quote from Age of Empires II.")
