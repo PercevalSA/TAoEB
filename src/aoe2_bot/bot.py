@@ -4,7 +4,7 @@ from pathlib import Path
 from telegram.ext import ApplicationBuilder
 from os import environ
 
-from ._bootstrap import install_sounds
+from ._bootstrap import bootstrap
 from ._handlers import register_handlers
 
 DEFAULT_TOKEN_FILE = Path('token.txt')
@@ -27,7 +27,7 @@ def get_token(token_file: Path) -> str:
     return token_file.read_text().strip()
 
 if __name__ == '__main__':
-    install_sounds()
+    bootstrap()
     application = ApplicationBuilder().token(get_token(DEFAULT_TOKEN_FILE)).build()
     register_handlers(application)
     logger.info("Starting polling...")
