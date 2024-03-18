@@ -1,14 +1,23 @@
 from telegram import Update
 from telegram.constants import MessageEntityType
 from telegram.ext import CommandHandler, ApplicationBuilder, ContextTypes
-from ._quotes import get_random_quote
 import logging
 from pathlib import Path
+from random import choice
+
 
 logger = logging.getLogger(__name__)
 
 assets_folder = Path(__file__).parent / "assets"
 aoe2_logo = assets_folder / "images/Age_of_Empires_2_Logo.png"
+sounds_folder = assets_folder / "sounds"
+
+
+def get_random_sound() -> Path:
+    """Return a random AoE2 quote audio file."""
+    quote_files = list(sounds_folder.glob("*.wav"))
+    return choice(quote_files)
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -18,7 +27,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    quote_file = get_random_quote()
+    quote_file = get_random_sound()
     await context.bot.send_audio(
         chat_id=update.effective_chat.id,
         audio=quote_file,
@@ -46,6 +55,7 @@ async def taunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
         thumbnail=aoe2_logo,
         disable_notification=True,
     )
+
 
 def register_taunt_handlers(application: ApplicationBuilder):
     taunt_number: int = 100

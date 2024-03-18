@@ -9,7 +9,7 @@ media_base_url = (
     "https://media.githubusercontent.com/media/PercevalSA/TAoEB/main/assets/sounds/"
 )
 # named are generic sounds, unnamed are all civilization sounds
-media_archives = ["named.zip"] # "unnamed.zip" is too big for now
+media_archives = ["named.zip"]  # "unnamed.zip" is too big for now
 
 
 def unzip(zip_file: Path, dest_folder: Path, *, remove_zip: bool = False) -> None:
@@ -33,7 +33,7 @@ def download_zip(url: str, dest_folder: Path) -> Path:
                 # and set chunk_size parameter to None.
                 # if chunk:
                 f.write(chunk)
-    
+
     logger.info(f"Download {local_filename.name} complete")
     return local_filename
 
@@ -44,9 +44,11 @@ def create_sounds_folder() -> Path:
     sounds_folder.mkdir(exist_ok=True)
     return sounds_folder
 
+
 def finish_bootstrap(sounds_folder: Path) -> None:
     (sounds_folder / "installation_complete").touch()
     logger.info("Audio files bootstrap complete")
+
 
 def check_bootstrap(sounds_folder: Path) -> bool:
     return (sounds_folder / "installation_complete").exists()
@@ -57,7 +59,7 @@ def install_sounds(sounds_folder: Path) -> None:
     for archive in media_archives:
         sounds_url = media_base_url + archive
         zip_file = download_zip(sounds_url, sounds_folder)
-        unzip(zip_file , sounds_folder, remove_zip=True)
+        unzip(zip_file, sounds_folder, remove_zip=True)
 
 
 def bootstrap() -> None:

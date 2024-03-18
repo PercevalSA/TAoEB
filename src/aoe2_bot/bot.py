@@ -1,4 +1,3 @@
-
 import logging
 from pathlib import Path
 from telegram.ext import ApplicationBuilder
@@ -7,16 +6,16 @@ from os import environ
 from ._bootstrap import bootstrap
 from ._handlers import register_handlers
 
-DEFAULT_TOKEN_FILE = Path('token.txt')
+DEFAULT_TOKEN_FILE = Path("token.txt")
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
+
 def get_token(token_file: Path) -> str:
-    token = environ.get('TGB_TOKEN')
+    token = environ.get("TGB_TOKEN")
     if token is not None:
         return token
 
@@ -26,7 +25,8 @@ def get_token(token_file: Path) -> str:
 
     return token_file.read_text().strip()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     bootstrap()
     application = ApplicationBuilder().token(get_token(DEFAULT_TOKEN_FILE)).build()
     register_handlers(application)
