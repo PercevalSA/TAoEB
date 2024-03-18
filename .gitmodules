@@ -1,0 +1,6 @@
+[submodule "ext/ww2ogg"]
+	path = ext/ww2ogg
+	url = git@github.com:hcs64/ww2ogg.git
+[submodule "ext/vgm_ripping"]
+	path = ext/vgm_ripping
+	url = git@github.com:hcs64/vgm_ripping.git
