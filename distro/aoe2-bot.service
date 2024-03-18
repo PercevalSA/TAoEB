@@ -1,0 +1,11 @@
+[Unit]
+Description=Age Of Empire 2 Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=token.txt
+ExecStart=/usr/bin/python3 -m aoe2_bot
+
+[Install]
+WantedBy=multi-user.target
