@@ -30,4 +30,5 @@ if __name__ == '__main__':
     install_sounds()
     application = ApplicationBuilder().token(get_token(DEFAULT_TOKEN_FILE)).build()
     register_handlers(application)
+    logger.info("Starting polling...")
     application.run_polling()
