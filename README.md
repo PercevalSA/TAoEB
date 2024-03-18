@@ -9,4 +9,4 @@ Get the softwares
  * [convert ww to ogg](https://github.com/hcs64/ww2ogg)
 
 
-If you build `wwisexmabank` on mondern Linux add `    $(CC) $^ -o $@ $(LDFLAGS)` on line 10 in `Makefile.common`
+If you build `wwisexmabank` or `xmash` on mondern Linux add `  $(CC) $^ -o $@ $(LDFLAGS)` on line 10 in `Makefile.common`
