@@ -1,11 +1,10 @@
 import logging
-from pathlib import Path
-from telegram.ext import ApplicationBuilder
 from os import environ
+
+from telegram.ext import ApplicationBuilder
 
 from ._bootstrap import bootstrap
 from ._handlers import register_handlers
-
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO

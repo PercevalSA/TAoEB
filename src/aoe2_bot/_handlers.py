@@ -1,10 +1,10 @@
-from telegram import Update
-from telegram.constants import MessageEntityType, ChatAction
-from telegram.ext import CommandHandler, ApplicationBuilder, ContextTypes
 import logging
 from pathlib import Path
 from random import choice
 
+from telegram import Update
+from telegram.constants import ChatAction, MessageEntityType
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 logger = logging.getLogger(__name__)
 

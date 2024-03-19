@@ -1,7 +1,8 @@
+import logging
 from pathlib import Path
 from zipfile import ZipFile
+
 import requests
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +76,7 @@ def bootstrap() -> None:
     if check_bootstrap(media_folder):
         logger.info("Audio files already installed")
         return
-    
+
     install_sounds(media_folder)
     install_image(media_folder)
 
