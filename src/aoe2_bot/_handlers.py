@@ -1,5 +1,5 @@
 from telegram import Update
-from telegram.constants import MessageEntityType
+from telegram.constants import MessageEntityType, ChatAction
 from telegram.ext import CommandHandler, ApplicationBuilder, ContextTypes
 import logging
 from pathlib import Path
@@ -30,11 +30,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def send_sound(update: Update, context: ContextTypes.DEFAULT_TYPE):
     audio_file = get_random_audio()
-    logger.info(f"sending audio_file {audio_file.name}")
+    logger.info(f"sending audio file {audio_file.name}")
 
     await context.bot.send_chat_action(
         chat_id=update.effective_chat.id,
-        action="uploading_audio",
+        action=ChatAction.RECORD_VOICE,
     )
 
     await context.bot.send_audio(
