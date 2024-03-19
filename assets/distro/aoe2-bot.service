@@ -4,8 +4,15 @@ After=network.target
 
 [Service]
 Type=simple
-EnvironmentFile=token.txt
+User=ubuntu
+Group=ubuntu
+
+EnvironmentFile=%h/.config/%N/env
+ExecStartPre=/bin/mkdir -p %h/.config/%N
 ExecStart=/usr/bin/python3 -m aoe2_bot
+
+Restart=always
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

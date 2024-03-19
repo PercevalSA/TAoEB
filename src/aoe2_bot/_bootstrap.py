@@ -7,7 +7,7 @@ import requests
 logger = logging.getLogger(__name__)
 
 media_base_url = (
-    "https://media.githubusercontent.com/media/PercevalSA/TAoEB/main/assets/"
+    "https://media.githubusercontent.com/media/PercevalSA/aoe2-bot/main/assets/"
 )
 # named are generic sounds, unnamed are all civilization sounds
 media_archives = ["named.zip"]  # "unnamed.zip" is too big for now
