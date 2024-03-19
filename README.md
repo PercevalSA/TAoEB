@@ -1,7 +1,13 @@
 # TAoEB
 Telegram Age Of Empires II Bot: give a random quote of Age of Empires 2 original edition
 
-# How to get sounds
+## Installation
+```
+python3 -m pip install .
+```
+Get the service file from github repository and set an environment file with your telegram bot token as `TGB_TOKEN`
+
+## How to get sounds
 to get sound checks your steam files in `$HOME/.steam/steam/steamapps/common/AoE2DE/wwise/` and get `pck` files.
 
 Get the softwares
