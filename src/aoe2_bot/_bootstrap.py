@@ -1,10 +1,20 @@
 import logging
+import os
+import platform
 from pathlib import Path
+from shutil import copy
 from zipfile import ZipFile
 
 import requests
 
-from ._folders import audio_archives, audio_folder, audio_url, bootstrap_file
+from ._folders import (
+    audio_archives,
+    audio_folder,
+    audio_url,
+    bootstrap_file,
+    service_file,
+    systemd_folder,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -68,9 +78,15 @@ def bootstrap() -> None:
 
 
 def install_systemd_service() -> None:
+    if platform.system() != "Linux":
+        logger.error("Systemd service is only available on Linux")
+        return
+
+    if os.geteuid() != 0:
+        logger.error("Service installation requires root privileges")
+        return
+
     logger.info("Installing systemd service...")
-    service_file = Path(__file__).parent / "aoe2_bot.service"
-    shutil.copy(service_file, "/etc/systemd/system/")
+    copy(service_file, systemd_folder)
     os.system("systemctl daemon-reload")
     os.system("systemctl enable aoe2-bot")
-    config_folder = Path.home() / ".config/aoe2-bot"
