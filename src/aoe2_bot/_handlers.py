@@ -61,7 +61,7 @@ async def send_audio(
         thumbnail=audio_caption,
         disable_notification=True,
     )
-    logger.info("audio sent")
+    logger.info(f"audio sent {audio_file.name}")
 
 
 async def send_sound(update: Update, context: ContextTypes.DEFAULT_TYPE):
