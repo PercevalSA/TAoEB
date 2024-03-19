@@ -77,18 +77,22 @@ async def send_taunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def taunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # search for taunt file
+    logger.debug("searching for corresponding taunt")
     taunt_num = update.message.text.strip("/").zfill(2)
-    taunt_file = audio_folder.glob(f"{taunt_num} .mp3")
+    taunt_file = list(audio_folder.glob(f"{taunt_num} *.mp3"))
+    logger.debug(f"Taunt {taunt_num} found: {taunt_file}")
 
     if not taunt_file:
+        logger.debug(f"Taunt {taunt_num} not found")
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=f"Taunt {taunt_num} not found",
         )
         return
 
-    await send_audio(update, context, taunt_file)
+    taunt = taunt_file[0]
+    logger.debug(f"Sending taunt {taunt}")
+    await send_audio(update, context, taunt)
 
 
 def register_taunt_handlers(application: ApplicationBuilder):

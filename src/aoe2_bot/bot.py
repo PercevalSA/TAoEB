@@ -7,7 +7,7 @@ from ._bootstrap import bootstrap
 from ._handlers import register_handlers
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG
 )
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ def get_token() -> str:
     return token
 
 
-if __name__ == "__main__":
+def main() -> None:
     bootstrap()
     application = ApplicationBuilder().token(get_token()).build()
     register_handlers(application)
