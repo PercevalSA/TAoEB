@@ -90,3 +90,7 @@ def install_systemd_service() -> None:
     copy(service_file, systemd_folder)
     os.system("systemctl daemon-reload")
     os.system("systemctl enable aoe2-bot")
+
+
+if __name__ == "__main__":
+    install_systemd_service()

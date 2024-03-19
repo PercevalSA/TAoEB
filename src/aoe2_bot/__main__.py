@@ -1,3 +1,3 @@
-from aoe2_bot.bot import main
+from aoe2_bot._bot import main
 
 main()

@@ -3,8 +3,8 @@ from os import environ
 
 from telegram.ext import ApplicationBuilder
 
-from ._bootstrap import bootstrap
 from ._handlers import register_handlers
+from .bootstrap import bootstrap
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG
