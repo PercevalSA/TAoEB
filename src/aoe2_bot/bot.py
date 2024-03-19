@@ -16,14 +16,11 @@ logger = logging.getLogger(__name__)
 
 def get_token(token_file: Path) -> str:
     token = environ.get("TGB_TOKEN")
-    if token is not None:
-        return token
-
-    logger.info("TGB_TOKEN not present in environment, using token from file.")
-    if not token_file.exists():
-        raise FileNotFoundError(f"Token file not found: {token_file}")
-
-    return token_file.read_text().strip()
+    if token is None:
+        error = "TGB_TOKEN not present in environment. Please export it or set it in an env file"
+        logger.error(error)
+        raise EnvironmentError(error)
+    return token
 
 
 if __name__ == "__main__":

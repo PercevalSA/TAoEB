@@ -8,15 +8,17 @@ from random import choice
 
 logger = logging.getLogger(__name__)
 
-assets_folder = Path(__file__).parent / "assets"
+assets_folder = Path(__file__).parent
 aoe2_logo = assets_folder / "images/Age_of_Empires_2_Logo.png"
 sounds_folder = assets_folder / "sounds"
 
 
-def get_random_sound() -> Path:
+def get_random_audio() -> Path:
     """Return a random AoE2 quote audio file."""
-    quote_files = list(sounds_folder.glob("*.wav"))
-    return choice(quote_files)
+    logger.debug("Getting random audio")
+    audio = choice(list(sounds_folder.glob("*.wav")))
+    logger.debug(f"Selected {audio}")
+    return audio
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -26,15 +28,23 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-async def quote(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    quote_file = get_random_sound()
+async def send_sound(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    audio_file = get_random_audio()
+    logger.info(f"sending audio_file {audio_file.name}")
+
+    await context.bot.send_chat_action(
+        chat_id=update.effective_chat.id,
+        action="uploading_audio",
+    )
+
     await context.bot.send_audio(
         chat_id=update.effective_chat.id,
-        audio=quote_file,
-        title=quote_file.stem,
-        thumbnail=aoe2_logo,
+        audio=audio_file,
+        title=audio_file.stem,
+        thumbnail=aoe2_logo if aoe2_logo.exists() else None,
         disable_notification=True,
     )
+    logger.info("audio sent")
 
 
 async def taunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -66,6 +76,6 @@ def register_taunt_handlers(application: ApplicationBuilder):
 def register_handlers(application: ApplicationBuilder):
     logger.info("Registering handlers")
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("aoe", quote))
+    application.add_handler(CommandHandler("aoe", send_sound))
 
     register_taunt_handlers(application)
