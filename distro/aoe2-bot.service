@@ -7,8 +7,7 @@ Type=simple
 User=ubuntu
 Group=ubuntu
 
-EnvironmentFile=%h/.config/%N/env
-ExecStartPre=/bin/mkdir -p %h/.config/%N
+EnvironmentFile=/home/ubuntu/.config/%N/env
 ExecStart=/usr/bin/python3 -m aoe2_bot
 
 Restart=always
